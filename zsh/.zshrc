@@ -45,9 +45,11 @@ ZSH_THEME="zhann"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux tmux pass vi-mode history-substring-search)
+plugins=(git mercurial tmux vi-mode history-substring-search)
 
 # User configuration
+#
+. ~/source/ut_profile.sh > /dev/null # Prevents output at login that interfers with sftp/scp
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"

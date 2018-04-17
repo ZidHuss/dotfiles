@@ -46,6 +46,8 @@ alias iotek="curl -sT- https://p.iotek.org"
 
 alias t=tmux
 
+alias tmux='tmux -u'
+
 alias grun='gradle --console plain run'
 
 alias konsole='konsole -stylesheet ~/.config/konsole.css'
@@ -53,6 +55,6 @@ alias konsole='konsole -stylesheet ~/.config/konsole.css'
 alias yt='youtube-viewer'
 
 # Silent Java Options
-_SILENT_JAVA_OPTIONS="$_JAVA_OPTIONS"
-unset _JAVA_OPTIONS
-alias java='java "$_SILENT_JAVA_OPTIONS"'
+# _SILENT_JAVA_OPTIONS="$_JAVA_OPTIONS"
+# unset _JAVA_OPTIONS
+# alias java='/usr/lib/jvm/jre-1.7.0/bin/java "$_SILENT_JAVA_OPTIONS"'

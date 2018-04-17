@@ -9,6 +9,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Plugins                                   "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:plug_url_format = 'git@github.com:%s.git'
 call plug#begin()
 """"""""""
 "  Look  "
@@ -81,6 +82,8 @@ Plug 'Konfekt/FastFold'
 Plug 'lervag/vimtex'
   let g:tex_flavor = 'latex'
   let g:vimtex_indent_enabled = 0
+Plug 'vim-scripts/fitnesse.vim'
+" Plug 'ludovicchabant/vim-gutentags'
 
 """""""""
 "  Git  "
@@ -150,8 +153,15 @@ Plug 'shougo/deoplete.nvim'
 Plug 'zchee/deoplete-go', { 'do': 'make', 'for': 'go' }
 Plug 'pbogut/deoplete-padawan', { 'for': 'php' }
 Plug 'zchee/deoplete-clang'
-    let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+    let g:deoplete#sources#clang#libclang_path = '/usr/lib64/llvm/libclang.so'
     let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+    let g:deoplete#sources#clang#flags = [
+                \ "-I/home/dfs/source", "-I/home/dfs/work/include",
+                \ "-l/home/dfs/work/lib/libbld.a",
+                \ "-l/home/dfs/work/lib/libtrans.a",
+                \ "-l/home/dfs/work/lib/libdai.a",
+                \ "-l/home/dfs/work/lib/libweb.a",
+                \]
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
     au FileType javascript,jsx,javascript.jsx setl omnifunc=tern#Complete
@@ -178,7 +188,7 @@ Plug 'reedes/vim-pencil'
 call plug#end()
 
 " Only works down here
-call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                 End Plugins                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -317,7 +327,7 @@ set shiftround
 set expandtab
 
 " HTML, JS, CSS indent 2 spaces
-autocmd FileType html,css,scss,javascript,json :setlocal sw=2 ts=2 sts=2
+autocmd FileType html,css,scss,javascript,json,c :setlocal sw=2 ts=2 sts=2
 
 " Gradle Groovy
 au BufNewFile,BufRead *.gradle set ft=groovy
