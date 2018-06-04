@@ -52,7 +52,7 @@ plugins=(git mercurial tmux vi-mode history-substring-search)
 . ~/source/ut_profile.sh > /dev/null # Prevents output at login that interfers with sftp/scp
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+#PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
