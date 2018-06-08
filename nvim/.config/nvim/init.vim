@@ -45,15 +45,10 @@ Plug 'Valloric/MatchTagAlways'
 "  Syntax  "
 """"""""""""
 Plug 'sheerun/vim-polyglot'
-
-" Plug 'benekastah/neomake'
-" autocmd! BufWritePost * if &ft != 'java' | Neomake
-    let g:neomake_warning_sign={'text': '⚠', 'texthl': 'SyntasticWarningSign'}
-    let g:neomake_error_sign={'text': '✖' , 'texthl': 'SyntasticErrorSign'}
-"     " autocmd! BufWritePost * Neomake
 Plug 'w0rp/ale'
     let g:ale_set_quickfix = 1
-    let g:ale_c_clang_options = '-g2 -DDAI_LINUX -Wno-unused-parameter -Wno-format-zero-length ' .
+    let g:ale_c_clang_options = '-g2 -DDAI_LINUX -Wno-unused-parameter ' .
+                \ '-Wno-format-zero-length ' .
                 \ '-Wno-sign-compare -std=gnu99 ' .
                 \ '-I' .
                 \ '-Iinclude/CSlim ' .
@@ -78,7 +73,6 @@ Plug 'reedes/vim-textobj-quote'
         autocmd FileType textile call textobj#quote#init()
         autocmd FileType text call textobj#quote#init({'educate': 0})
     augroup END
-Plug 'Konfekt/FastFold'
 Plug 'lervag/vimtex'
   let g:tex_flavor = 'latex'
   let g:vimtex_indent_enabled = 0
@@ -138,12 +132,6 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "  Completion  "
 """"""""""""""""
 set omnifunc=syntaxcomplete#Complete
-" Plug 'Valloric/YouCompleteMe'
-"     let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-"     let g:ycm_confirm_extra_conf = 0
-"     let g:ycm_autoclose_preview_window_after_insertion = 1
-    let g:EclimCompletionMethod = 'omnifunc'
-    let g:EclimProjectTreeAutoOpen = 1
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
     let g:fzf_action = {
     \ 'ctrl-m': 'e',
@@ -161,16 +149,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'shougo/deoplete.nvim'
     let g:deoplete#enable_camel_case = 1
-    let g:deoplete#omni_patterns = {}
-    let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
-    let g:deoplete#ignore_sources = {}
-    let g:deoplete#ignore_sources.java = ['tag']
     let g:deoplete#enable_at_startup = 1
 Plug 'zchee/deoplete-clang', { 'for': [ 'c', 'cpp' ] }
     let g:deoplete#sources#clang#libclang_path = '/usr/lib64/llvm/libclang.so'
     let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
     let g:deoplete#sources#clang#flags = [
-                \ "-I/home/dfs/source", "-I/home/dfs/work/include", "-I/home/dfs/test_centre/cslim/include/CSlim",
+                \ "-I/home/dfs/source", "-I/home/dfs/work/include",
+                \ "-I/home/dfs/test_centre/cslim/include/CSlim",
                 \ "-l/home/dfs/work/lib/libbld.a",
                 \ "-l/home/dfs/work/lib/libtrans.a",
                 \ "-l/home/dfs/work/lib/libdai.a",
@@ -237,32 +222,11 @@ inoremap <silent><expr> <S-Tab>
   \ pumvisible() ? "\<C-p>" :
   \ "<S-Tab>"
 
-" Eclim Functions
-function! EclimMappings()
-    nnoremap <buffer> <leader>ei :JavaImport<cr>
-    nnoremap <buffer> <leader>eI :JavaImportOrganize<cr>
-    nnoremap <buffer> <leader>ec :JavaCorrect<cr>
-    nnoremap <buffer> <leader>ed :JavaDocPreview<cr>
-    nnoremap <buffer> <leader>eD :JavaDocSearch<cr>
-    nnoremap <buffer> <leader>ef :%JavaFormat<cr>
-    nnoremap <buffer> <leader>en :JavaNew
-    nnoremap <buffer> <leader>em :JavaGetSet<cr>
-    nnoremap <buffer> <leader>eM :JavaImpl<cr>
-    nnoremap <buffer> <leader>eg :JavaGet<cr>
-    nnoremap <buffer> <leader>es :JavaSet<cr>
-    nnoremap <buffer> <leader>eF :JavaSearch<cr>
-endfunction
-autocmd FileType java :call EclimMappings()
-autocmd BufWritePre *.java :Validate
-
 " Remove search higlight
 nmap <silent> <BS>  :nohlsearch<CR>
 
 " Focus on split
 noremap <leader>o :only<CR>
-
-" Quicker folding
-noremap <space> za
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                End Mappings                                 "
@@ -314,6 +278,9 @@ let g:xml_syntax_folding = 0
 " Allow other cursors in terminal
 set guicursor=
 
+" Disable folding
+set nofoldenable
+
 autocmd VimResized * execute "normal! \<c-q>="
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                  End Look                                   "
@@ -332,19 +299,8 @@ set expandtab
 " HTML, JS, CSS indent 2 spaces
 autocmd FileType html,css,scss,javascript,json,c,cpp :setlocal sw=2 ts=2 sts=2
 
-" Gradle Groovy
-au BufNewFile,BufRead *.gradle set ft=groovy
-
 " SQL Syntax
 au BufNewFile,BufRead sql* set ft=sql
-
-" Go Syntax highlighting
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   General                                   "
@@ -374,9 +330,6 @@ set nowritebackup
 " More natural split opening
 set splitbelow
 set splitright
-
-" Code folding
-set foldmethod=syntax
 
 " Clear trailing whitespace in selected file types on save
 autocmd BufWritePre *.py,*.jsx?,*.hs,*.html,*.css,*.scss :%s/\s\+$//e
